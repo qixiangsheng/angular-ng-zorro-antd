@@ -1,0 +1,53 @@
+<div class="login-wrapper" nz-row nzType="flex" nzAlign="middle">
+  <div style="width: 600px;"></div>
+  <div class="flex-all">
+    <div nz-row nzType="flex" nzJustify="center">
+      <nz-spin [nzSpinning]="isLoading" class="spin-wrapper">
+        <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group [nzPrefix]="prefixUser">
+                <input type="text" nz-input formControlName="userName" placeholder="用户名">
+              </nz-input-group>
+              <nz-form-explain
+                *ngIf="loginForm.get('userName').dirty && loginForm.get('userName').hasError('required')">
+                请输入用户名
+              </nz-form-explain>
+              <nz-form-explain
+                *ngIf="loginForm.get('userName').dirty && loginForm.get('userName').hasError('minlength')">
+                用户名长度至少3位
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group [nzPrefix]="prefixLock">
+                <input type="password" nz-input formControlName="password" placeholder="密码">
+              </nz-input-group>
+              <nz-form-explain
+                *ngIf="loginForm.get('password').dirty && loginForm.get('password').hasError('required')">
+                请输入密码
+              </nz-form-explain>
+              <nz-form-explain *ngIf="loginForm.get('password').dirty && loginForm.get('password').hasError('pattern')">
+                密码由字母、数字组成，长度至少3位
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox>
+                <span>记住我</span>
+              </label>
+              <a class="login-form-forgot" href="javascript:">忘记密码</a>
+              <button nz-button class="login-form-button" [nzType]="'primary'">登 录</button>
+              或者
+              <a href="javascript:">马上注册!</a>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+        <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+        <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+      </nz-spin>
+    </div>
+  </div>
+</div>

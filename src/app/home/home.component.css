@@ -1,0 +1,42 @@
+.home-wrapper {
+  height: 100%;
+}
+
+.home-content {
+  padding: 15px;
+  overflow: auto;
+}
+
+.ng-header {
+  color: #ffffff;
+}
+
+:host ::ng-deep .ant-layout-header,
+:host ::ng-deep .ant-layout-footer {
+  color: #ffffff;
+}
+
+:host ::ng-deep .ant-layout-footer {
+  line-height: 1.5;
+}
+
+:host ::ng-deep .ant-layout-sider {
+  background: #001529;
+  color: #fff;
+  line-height: 120px;
+}
+
+:host > ::ng-deep .ant-layout {
+  margin-bottom: 48px;
+}
+
+:host ::ng-deep .ant-layout:last-child {
+  margin: 0;
+}
+
+.log-out-tip {
+  height: 40px;
+  padding-left: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}

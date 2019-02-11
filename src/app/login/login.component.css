@@ -1,0 +1,27 @@
+.login-wrapper {
+  height: 100%;
+  background: #93defe url("../../assets/login-img.png") 100px center no-repeat;
+  background-size: 500px 400px;
+}
+
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.spin-wrapper {
+  background: #ffffff;
+  padding: 30px 20px 0;
+  border-radius: 5px;
+}
+
+.flex-all {
+  flex: 1;
+}

@@ -1,0 +1,108 @@
+<nz-table #basicTable
+          [nzData]="employeeData"
+          [nzFrontPagination]="frontPage"
+          [nzTotal]="_total"
+          [(nzPageIndex)]="_page"
+          [(nzPageSize)]="_limit"
+          [nzLoading]="isLoading"
+          (nzPageIndexChange)="getEmployeeData()">
+  <thead>
+  <tr>
+    <th>姓名</th>
+    <th>性别</th>
+    <th>年龄</th>
+    <th>电话</th>
+    <th>住址</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.name}}</td>
+    <td>{{data.gender}}</td>
+    <td>{{data.age}}</td>
+    <td>{{data.phone}}</td>
+    <td>{{data.address}}</td>
+    <td>
+      <a (click)="openEditModal(data.id)">编辑</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a nz-popconfirm nzTitle="确认删除该员工吗？" (nzOnConfirm)="confirmDel(data.id)" nzPlacement="bottom" >删除</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<!-- 编辑弹框 -->
+<nz-modal [(nzVisible)]="showEditModal" nzTitle="编辑员工信息" (nzOnCancel)="cancelEdit()" (nzOnOk)="sureEdit()">
+  <nz-spin [nzSpinning]="isEditing">
+    <form nz-form [formGroup]="validateForm" *ngIf="validateForm">
+
+      <!-- 姓名 -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>姓名</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzHasFeedback>
+          <input nz-input formControlName="name" placeholder="">
+          <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors || validateForm.get('name').pending ">
+            <ng-container *ngIf="validateForm.get('name').hasError('required')">
+              请输入姓名！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('name').hasError('minlength')">
+              姓名长度至少2位！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- 性别 + 年龄 -->
+      <nz-form-item>
+        <!-- 性别 -->
+        <nz-form-label [nzSpan]="5">性别</nz-form-label>
+        <nz-form-control [nzSpan]="6">
+          <nz-radio-group formControlName="gender">
+            <label nz-radio nzValue="男">男</label>
+            <label nz-radio nzValue="女">女</label>
+          </nz-radio-group>
+        </nz-form-control>
+        <!-- 年龄 -->
+        <nz-form-label [nzSpan]="4" nzRequired>年龄</nz-form-label>
+        <nz-form-control [nzSpan]="6" nzHasFeedback>
+          <input nz-input formControlName="age" type="number" placeholder="">
+          <nz-form-explain *ngIf="validateForm.get('age').dirty && validateForm.get('age').errors || validateForm.get('age').pending ">
+            <ng-container *ngIf="validateForm.get('age').hasError('required')">
+              请输入年龄！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('age').hasError('min')">
+              年龄至少1岁！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- 地址 -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>地址</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzHasFeedback>
+          <input nz-input formControlName="address" placeholder="">
+          <nz-form-explain *ngIf="validateForm.get('address').dirty && validateForm.get('address').errors || validateForm.get('address').pending ">
+            <ng-container *ngIf="validateForm.get('address').hasError('required')">
+              请输入地址！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- 手机号 -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5" nzRequired>手机号</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzHasFeedback>
+          <input nz-input formControlName="phone" placeholder="">
+          <nz-form-explain *ngIf="validateForm.get('phone').dirty && validateForm.get('phone').errors || validateForm.get('phone').pending ">
+            <ng-container *ngIf="validateForm.get('phone').hasError('required')">
+              请输入手机号！
+            </ng-container>
+            <ng-container *ngIf="validateForm.get('phone').hasError('pattern')">
+              请输入正确的手机号！
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-spin>
+</nz-modal>

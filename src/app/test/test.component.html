@@ -1,0 +1,11 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control>
+      <label nz-checkbox formControlName="unlimited" (ngModelChange)="handleUnlimited()" [nzChecked]="validateForm.value.unlimited">
+        <span>不限</span>
+      </label>
+      <nz-checkbox-group formControlName="industryOptions" (ngModelChange)="updateSingleIndustry()"></nz-checkbox-group>
+    </nz-form-control>
+  </nz-form-item>
+  <button nz-button class="login-form-button" [nzType]="'primary'">查询</button>
+</form>

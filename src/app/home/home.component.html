@@ -1,0 +1,44 @@
+<nz-layout class="home-wrapper">
+  <nz-header nz-row nzType="flex" nzAlign="middle">
+    <h2 nz-col nzSpan="18" class="ng-header">Angular + Ng-Zorro-Antd 管理后台</h2>
+    <div nz-col nzSpan="6">
+      <div nz-row nzType="flex" nzJustify="end" nzAlign="middle">
+        <div>
+          <nz-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+        </div>
+        <div>
+          <div class="log-out-tip" nz-popconfirm nzTitle="确定退出登录吗？" (nzOnConfirm)="confirmLogOut()" nzPlacement="left">
+            退出
+          </div>
+        </div>
+      </div>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'lg'">
+      <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+        <li nz-submenu>
+          <span title><i nz-icon type="user"></i><span class="nav-text">员工管理</span></span>
+          <ul>
+            <li nz-menu-item routerLink="/home/employee">员工列表</li>
+            <li nz-menu-item routerLink="/home/employee/add">员工添加</li>
+          </ul>
+        </li>
+        <!--
+                <li nz-menu-item routerLink="/home/test">
+                  <span><i nz-icon type="file"></i><span class="nav-text">复选框测试</span></span>
+                </li>
+        -->
+        <li nz-menu-item routerLink="/home/charts">
+          <span><i nz-icon type="file"></i><span class="nav-text">HighCharts</span></span>
+        </li>
+        <li nz-menu-item routerLink="/home/high-angular">
+          <span><i nz-icon type="file"></i><span class="nav-text">High-Angular</span></span>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-content class="home-content">
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
